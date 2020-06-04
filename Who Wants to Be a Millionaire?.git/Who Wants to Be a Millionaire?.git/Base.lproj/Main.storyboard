@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Who_Wants_to_Be_a_Millionaire__git" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Db1-CC-z0J">
+                                <rect key="frame" x="113.5" y="398" width="187" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdo-NV-G6x">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="53"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <state key="normal" title="Начать игру"/>
+                                        <connections>
+                                            <segue destination="WCk-3b-a9q" kind="show" id="fOS-B8-Ypv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRS-wb-c00">
+                                        <rect key="frame" x="0.0" y="67" width="187" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Таблица результатов"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Db1-CC-z0J" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6un-SC-V7z"/>
+                            <constraint firstItem="Db1-CC-z0J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ot1-lL-z85"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="134"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="DJk-ME-KDi">
+            <objects>
+                <viewController id="WCk-3b-a9q" customClass="GameViewController" customModule="Who_Wants_to_Be_a_Millionaire__git" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gYB-ui-Jdr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cz9-fI-VAA">
+                                <rect key="frame" x="186" y="411" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xZW-3p-6m8">
+                                <rect key="frame" x="139" y="696" width="58" height="72"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i55-Eq-d2r">
+                                        <rect key="frame" x="0.0" y="0.0" width="58" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="firstAnswerButton:" destination="WCk-3b-a9q" eventType="touchUpInside" id="z4O-hB-HgL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Br-Eo-eeQ">
+                                        <rect key="frame" x="0.0" y="36" width="58" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="secondAnswerButton:" destination="WCk-3b-a9q" eventType="touchUpInside" id="EQW-00-GxN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZrL-OG-xM3">
+                                <rect key="frame" x="217" y="696" width="58" height="72"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNO-2j-T8L">
+                                        <rect key="frame" x="0.0" y="0.0" width="58" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="thirdAnswerButton:" destination="WCk-3b-a9q" eventType="touchUpInside" id="OYa-9j-xMU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hia-sj-21e">
+                                        <rect key="frame" x="0.0" y="36" width="58" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="fourthAnswerButton:" destination="WCk-3b-a9q" eventType="touchUpInside" id="ImU-nE-b54"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4N3-R3-TvA" firstAttribute="bottom" secondItem="xZW-3p-6m8" secondAttribute="bottom" constant="40" id="221-2B-rPe"/>
+                            <constraint firstItem="cz9-fI-VAA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4N3-R3-TvA" secondAttribute="leading" constant="14" id="48h-bH-9yp"/>
+                            <constraint firstItem="4N3-R3-TvA" firstAttribute="bottom" secondItem="ZrL-OG-xM3" secondAttribute="bottom" constant="40" id="5Gs-EV-jXD"/>
+                            <constraint firstItem="xZW-3p-6m8" firstAttribute="trailing" secondItem="gYB-ui-Jdr" secondAttribute="centerX" constant="-10" id="IBv-t8-tzL"/>
+                            <constraint firstItem="xZW-3p-6m8" firstAttribute="trailing" secondItem="ZrL-OG-xM3" secondAttribute="leading" constant="-20" id="aej-ma-JMP"/>
+                            <constraint firstItem="cz9-fI-VAA" firstAttribute="centerY" secondItem="gYB-ui-Jdr" secondAttribute="centerY" id="e7J-zc-4Gx"/>
+                            <constraint firstItem="cz9-fI-VAA" firstAttribute="centerX" secondItem="gYB-ui-Jdr" secondAttribute="centerX" id="hfb-Gh-Ztm"/>
+                            <constraint firstItem="4N3-R3-TvA" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cz9-fI-VAA" secondAttribute="trailing" constant="14" id="lIt-qn-s6h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4N3-R3-TvA"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lHx-Do-yz0"/>
+                    <connections>
+                        <outlet property="firstAnswerButton" destination="i55-Eq-d2r" id="wQI-ap-cBD"/>
+                        <outlet property="fourthAnswerButton" destination="Hia-sj-21e" id="GN6-vy-CuF"/>
+                        <outlet property="questionLabel" destination="cz9-fI-VAA" id="NhB-Ot-Ytf"/>
+                        <outlet property="secondAnswerButton" destination="9Br-Eo-eeQ" id="wjw-3h-kFK"/>
+                        <outlet property="thirdAnswerButton" destination="TNO-2j-T8L" id="4Qm-5f-3Yw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DMt-Rr-daQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1117" y="-237"/>
+        </scene>
+    </scenes>
+</document>
