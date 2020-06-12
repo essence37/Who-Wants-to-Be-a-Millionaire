@@ -18,11 +18,20 @@ final class Game {
             gameSessionsCaretaker.save(results: self.results)
         }
     }
+    private(set) var customQuestions: [UserCustomQuestion] {
+        didSet {
+            userCustomQuestionsCareTaker.save(questions: self.customQuestions)
+        }
+    }
     
     private let gameSessionsCaretaker = GameSessionsCaretaker()
+    private let userCustomQuestionsCareTaker = UserCustomQuestionsCareTaker()
+    // Уровень сложности игры.
+    var difficultyLevel: DifficultyLevels = .graduation
     
     private init() {
         self.results = self.gameSessionsCaretaker.retrieveResults()
+        self.customQuestions = self.userCustomQuestionsCareTaker.retrieveCustomQuestions()
     }
     
     func addResult(_ result: GameSession) {
@@ -35,6 +44,10 @@ final class Game {
     // Удаление конкретного результата игры.
     func clearResult(at rowWithResult: Int) {
         self.results.remove(at: rowWithResult)
+    }
+    
+    func addQuestion(_ question: UserCustomQuestion) {
+        self.customQuestions.append(question)
     }
 }
 
