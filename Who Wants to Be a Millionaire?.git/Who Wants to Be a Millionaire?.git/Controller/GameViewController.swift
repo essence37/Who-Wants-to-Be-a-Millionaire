@@ -201,9 +201,10 @@ class GameViewController: UIViewController {
     // Добавление нового вопроса.
     func addCustomQuestion() {
         let customQuestions = Game.shared.customQuestions
+        guard !customQuestions.isEmpty else { return }
         // Словарь с вопросами пользователя.
         var currentQuestions: [String : ([String : Bool], DifficultyLevels)] = [:]
-        for i in 0...Game.shared.customQuestions.count - 1 {
+        for i in 0...customQuestions.count - 1 {
             var findingOutСomplexity: DifficultyLevels {
                 switch customQuestions[i].questionDifficulty {
                 case 0:

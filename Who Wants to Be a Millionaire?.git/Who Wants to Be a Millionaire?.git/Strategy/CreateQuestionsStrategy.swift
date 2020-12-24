@@ -54,9 +54,9 @@ final class NormalCreateQuestionsStrategy: CreateQuestionsStrategy {
         var mutableTuple = tuple
         var questions: [String : [String : Bool]] = [:]
         for _ in 1...15 {
-            let easyQuestion = mutableTuple.1.randomElement()
-            questions.updateValue(easyQuestion!.value, forKey: easyQuestion!.key)
-            mutableTuple.1.removeValue(forKey: easyQuestion!.key)
+            let normalQuestion = mutableTuple.1.randomElement()
+            questions.updateValue(normalQuestion!.value, forKey: normalQuestion!.key)
+            mutableTuple.1.removeValue(forKey: normalQuestion!.key)
         }
         return questions
     }
@@ -67,9 +67,9 @@ final class HardCreateQuestionsStrategy: CreateQuestionsStrategy {
         var mutableTuple = tuple
         var questions: [String : [String : Bool]] = [:]
         for _ in 1...15 {
-            let easyQuestion = mutableTuple.2.randomElement()
-            questions.updateValue(easyQuestion!.value, forKey: easyQuestion!.key)
-            mutableTuple.2.removeValue(forKey: easyQuestion!.key)
+            let hardQuestion = mutableTuple.2.randomElement()
+            questions.updateValue(hardQuestion!.value, forKey: hardQuestion!.key)
+            mutableTuple.2.removeValue(forKey: hardQuestion!.key)
         }
         return questions
     }
