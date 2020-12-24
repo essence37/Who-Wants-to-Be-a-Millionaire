@@ -11,6 +11,7 @@ import UIKit
 class GameSession: Codable {
     let date: Date
     let score: Int
+    // Процент прохождения игры.
     let ratioOfRightAnswers: Double
     
     init(date: Date, score: Int, ratioOfRightAnswers: Double) {

@@ -10,6 +10,8 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    // Процент прохождения игры.
+    @IBOutlet weak var ratioOfRightAnswersLabel: UILabel!
     // Денежное «дерево».
     @IBOutlet weak var fifteenthGainLabel: UILabel!
     @IBOutlet weak var fourteenthGainLabel: UILabel!
@@ -39,27 +41,58 @@ class GameViewController: UIViewController {
     
     // MARK: - Переменные и константы.
     // Словарь с вопросами и ответами.
-    var allQuestionsAndAnswers = Question().questions
+    var allQuestionsAndAnswers = (Question().easyQuestions, Question().normalQuestions, Question().hardQuestions)
+    // Вопросы и ответы для текущей игры.
+    var currentGameQuestions: [String : [String : Bool]] = [:]
     // Значение ответа привязывается к кнопке и передаётся в этот словарь.
     var answers: [UIButton? : Bool] = [:]
     // Счётчик вопросов.
     var questionCounter = 1
+    // Уровень сложности.
+    var difficulty: DifficultyLevels = .graduation
+    // Стратегия формирования вопросов, исходя из уровня сложности.
+    private var createQuestionsStrategy: CreateQuestionsStrategy {
+        switch self.difficulty {
+        case .easy:
+            return EasyCreateQuestionsStrategy()
+        case .normal:
+            return NormalCreateQuestionsStrategy()
+        case .hard:
+            return HardCreateQuestionsStrategy()
+        case .graduation:
+            return GraduationCreateQuestionsStrategy()
+        }
+    }
+    // Процент прохождения игры.
+    var ratioOfRightAnswers = Observable<Double>(0.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        createQuastions()
         setPayoutStructureLabels()
         generateButtonValues(generateQuestionAndAnswers())
+        addCustomQuestion()
+        
+        ratioOfRightAnswers.addObserver(self, options: [.new, .initial], closure: { [weak self] (ratioOfRightAnswers, _) in
+            self?.ratioOfRightAnswersLabel.text = "Процент прохождения игры: \(ratioOfRightAnswers)%"
+        })
+
+        
     }
     // MARK: - Функции
+    // Генерация вопросов и ответов для текущей игры.
+    func createQuastions() {
+        let questions = self.createQuestionsStrategy.createQuestions(from: allQuestionsAndAnswers)
+        self.currentGameQuestions = questions
+    }
     // Генерация вопроса. Отображение вопроса. Функция возвращает словарь с ответами от сгенерированного рандомно вопроса.
     func generateQuestionAndAnswers() -> [String : Bool] {
         // Генерация рандомного ключа (текста вопроса).
-        let randomKey = Dictionary.Keys.randomElement(allQuestionsAndAnswers.keys)
+        let key = currentGameQuestions.first?.key
         // Текст вопроса.
-        questionLabel.text = randomKey()
-        let answers = allQuestionsAndAnswers[questionLabel.text!]!
-        allQuestionsAndAnswers.removeValue(forKey: questionLabel.text!)
+        questionLabel.text = key
+        let answers = currentGameQuestions[questionLabel.text!]!
+        currentGameQuestions.removeValue(forKey: questionLabel.text!)
         return answers
     }
     // Отображение ответов, передача значений ответов в словарь. Текст и значение ответа привязываются к соответствующей кнопке.
@@ -110,6 +143,10 @@ class GameViewController: UIViewController {
                 UIView.animate(withDuration: 0.1, delay: 1.0, animations: {
                     button.backgroundColor = UIColor.green
                     payoutStructure[mutableNum]?.backgroundColor = .orange
+                    // Передача в GameSession информации о текущей игре для обновления процента прохождения.
+                    let score = self.questionCounter - 1
+                    self.ratioOfRightAnswers.value = Double(score*100/15)
+//                    GameSession.init(date: Date(), score: score, ratioOfRightAnswers: self.ratioOfRightAnswers.value)
                     if mutableNum > 1 {
                         payoutStructure[mutableNum-1]?.backgroundColor = .clear
                     }
@@ -133,7 +170,8 @@ class GameViewController: UIViewController {
                     sleep(2)
                     // Передача в GameSession информации о результате текущей игры.
                     let score = self.questionCounter - 1
-                    let result = GameSession(date: Date(), score: score, ratioOfRightAnswers: Double(score*100/15))
+                    self.ratioOfRightAnswers = Observable<Double>(Double(score*100/15))
+                    let result = GameSession(date: Date(), score: score, ratioOfRightAnswers: self.ratioOfRightAnswers.value)
                     Game.shared.addResult(result)
                     // Возврат в главное меню.
                     self.performSegue(withIdentifier: "cancelToMainMenu", sender: self)
@@ -160,6 +198,32 @@ class GameViewController: UIViewController {
         fifteenthGainLabel.text = "15. $1.000.000"
     }
 
+    // Добавление нового вопроса.
+    func addCustomQuestion() {
+        let customQuestions = Game.shared.customQuestions
+        guard !customQuestions.isEmpty else { return }
+        // Словарь с вопросами пользователя.
+        var currentQuestions: [String : ([String : Bool], DifficultyLevels)] = [:]
+        for i in 0...customQuestions.count - 1 {
+            var findingOutСomplexity: DifficultyLevels {
+                switch customQuestions[i].questionDifficulty {
+                case 0:
+                    return .easy
+                case 1:
+                    return .normal
+                case 2:
+                    return .hard
+                default:
+                    return .easy
+                }
+            }
+            currentQuestions.updateValue(([customQuestions[i].possibleAnswerA : customQuestions[i].correctAnswerA,
+                                           customQuestions[i].possibleAnswerB : customQuestions[i].correctAnswerB,
+                                           customQuestions[i].possibleAnswerC : customQuestions[i].correctAnswerC,
+                                           customQuestions[i].possibleAnswerD : customQuestions[i].correctAnswerD], findingOutСomplexity), forKey: customQuestions[i].question)
+        }
+        print(currentQuestions)
+    }
     /*
      // MARK: - Navigation
      

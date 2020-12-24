@@ -9,13 +9,7 @@
 import UIKit
 
 struct Question {
-    enum difficultyLevels {
-        case easy
-        case normal
-        case hard
-    }
-    var questions: Dictionary<String, [String : Bool]> = [
-        // easy
+    var easyQuestions: Dictionary<String, [String : Bool]> = [
         "Как называется экзотическое животное из Южной Америки?" : [ "пчеложор" : false,
                                                                      "термитоглот" : false,
                                                                      "муравьед" : true,
@@ -59,8 +53,8 @@ struct Question {
         "Куда Корней Чуковский в стихотворении \"Бармалей\" советовал детям не ходить?" : ["в Азию" : false,
                                                                                            "в Африку" : true,
                                                                                            "в Америку" : false,
-                                                                                           "в Антарктиду" : false],
-        // normal
+                                                                                           "в Антарктиду" : false]]
+    var normalQuestions: Dictionary<String, [String : Bool]> = [
         "В какой басне Крылова среди действующих лиц есть человек?" : ["\"Лягушка и Вол\"" : false,
                                                                        "\"Свинья под Дубом\"" : false,
                                                                        "\"Осел и Соловей\"" : false,
@@ -84,16 +78,16 @@ struct Question {
         "Как называется один из видов жуков?" : ["артиллерист" : false,
                                                  "командор" : false,
                                                  "канонир" : false,
-                                                 "бомбардир" : true],
-        // hard
+                                                 "бомбардир" : true]]
+    var hardQuestions: Dictionary<String, [String : Bool]> = [
         "Что в старину располагалось в Хельсинки на площади Наринкка?" : ["тюрьма" : false,
                                                                           "кладбище" : false,
                                                                           "торговые ряды" : true,
                                                                           "больница" : false],
         "Какое имя дал поручику Ржевскому автор пьесы \"Давным-давно\" Гладков?" : ["Михаил" : false,
-                                                                                    "Дмитрий" : true,
-                                                                                    "Василий" : false,
-                                                                                    "Александр" : false],
+                                                                                "Дмитрий" : true,
+                                                                                "Василий" : false,
+                                                                                "Александр" : false],
         "Чем увлекался знаменитый сказочник Ганс-Христан Андерсен?" : ["вязанием" : false,
                                                                        "вырезанием из бумаги" : true,
                                                                        "выжиганием" : false,
@@ -106,8 +100,6 @@ struct Question {
                                                             "носить багаж" : false,
                                                             "кормить пассажиров" : true,
                                                             "уничтожать мух" : false]]
-    
-    
 }
 
 
